@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="style.css">
+<head>
+    <meta charset="UTF-8">
+    <title>Employees</title>
+</head>
+<body>
+    <div class="tab-bar">
+        <a class="button" href="departments.html">Departments</a>
+        <a class="active-button button" href="employees.html">Employees</a>
+    </div>
+
+    <div id="employees" class="content">
+        <div class="buttons-bar">
+            <a class="add-button" href="add_employee.html">Add</a>
+        </div>
+        <div class="employees-content">
+            <table class="employees-table">
+                <tr class="table-header">
+                    <th>Name</th>
+                    <th>Department</th>
+                    <th>Position</th>
+                    <th>Salary</th>
+                    <th>Birthdate</th>
+                    <th></th>
+                </tr>
+                <tr class="table-content">
+                    <td>Oleksandr</td>
+                    <td>DP1</td>
+                    <td>Junior Python Developer</td>
+                    <td>700</td>
+                    <td>22.11.1998</td>
+                    <td>
+                        <a class="edit-button" href="edit_employee.html">Edit</a>
+                        <button id="1"  class="delete-button" onclick="delete_employee()">Delete</button>
+                    </td>
+                </tr>
+                <tr class="table-content">
+                    <td>Diana</td>
+                    <td>DP1</td>
+                    <td>Middle Python Developer</td>
+                    <td>1200</td>
+                    <td>15.05.2000</td>
+                    <td>
+                        <a class="edit-button" href="edit_employee.html">Edit</a>
+                        <button id="2" class="delete-button" onclick="delete_employee()">Delete</button>
+                    </td>
+                </tr>
+                <tr class="table-content">
+                    <td>Danil</td>
+                    <td>DP1</td>
+                    <td>Junior Python Developer</td>
+                    <td>1800</td>
+                    <td>01.01.1996</td>
+                    <td>
+                        <a class="edit-button" href="edit_employee.html">Edit</a>
+                        <button id="3" class="delete-button" onclick="delete_employee()">Delete</button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+<script>
+    function delete_employee(){
+        if (confirm("Please confirm deletion of the employee")) {
+        } else {
+        }
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="style.css">
+<head>
+    <meta charset="UTF-8">
+    <title>Departments</title>
+</head>
+<body>
+    <div class="tab-bar">
+        <a class="active-button button" href="departments.html">Departments</a>
+        <a class="button" href="employees.html">Employees</a>
+    </div>
+    <div id="departments" class="content">
+        <div class="buttons-bar">
+            <a class="add-button" href="add_department.html">Add</a>
+        </div>
+        <div class="departments-content">
+            <table class="departments-table">
+                <tr class="table-header">
+                    <th>Name</th>
+                    <th>Address</th>
+                    <th>Employees count</th>
+                    <th>Avg. salary</th>
+                    <th>Phone number</th>
+                    <th></th>
+                </tr>
+                <tr class="table-content">
+                    <td>DP1</td>
+                    <td>Shevchenka st. 55</td>
+                    <td>44</td>
+                    <td>1500</td>
+                    <td>+380668275667</td>
+                    <td>
+                        <a class="edit-button" href="edit_department.html">Edit</a>
+                        <button id="1"  class="delete-button" onclick="delete_department()">Delete</button>
+                    </td>
+                </tr>
+                <tr class="table-content">
+                    <td>DP1</td>
+                    <td>Shevchenka st. 55</td>
+                    <td>44</td>
+                    <td>1500</td>
+                    <td>+380668275667</td>
+                    <td>
+                        <a class="edit-button" href="edit_department.html">Edit</a>
+                        <button id="2" class="delete-button" onclick="delete_department()">Delete</button>
+                    </td>
+                </tr>
+                <tr class="table-content">
+                    <td>DP1</td>
+                    <td>Shevchenka st. 55</td>
+                    <td>44</td>
+                    <td>1500</td>
+                    <td>+380668275667</td>
+                    <td>
+                        <a class="edit-button" href="edit_department.html">Edit</a>
+                        <button id="3" class="delete-button" onclick="delete_department()">Delete</button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+<script>
+    function delete_department(){
+        if (confirm("Please confirm deletion of the department")) {
+        } else {
+        }
+    }
+</script>
+</body>
+</html>

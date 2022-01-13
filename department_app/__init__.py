@@ -14,9 +14,5 @@ def create_app():
         pass
 
     database.db.init_app(app)
-
-    @app.route('/hello')
-    def hello():
-        return 'Hello, World!'
-
+    database.migrate.init_app(app, database.db)
     return app

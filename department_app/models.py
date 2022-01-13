@@ -8,7 +8,7 @@ from department_app.database import db
 
 
 class Department(db.Model):
-    department_id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4())
+    department_id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
     department_name = Column(String)
     department_phone_number = Column(String)
 
@@ -16,7 +16,7 @@ class Department(db.Model):
 
 
 class Employee(db.Model):
-    employee_id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4())
+    employee_id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
     employee_name = Column(String)
     position = Column(String)
     salary = Column(Float)

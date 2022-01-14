@@ -1,6 +1,7 @@
 import os
 import department_app.database as database
 import department_app.models as models
+import department_app.service as service
 
 from flask import Flask
 

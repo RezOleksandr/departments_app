@@ -16,7 +16,7 @@ class Department(db.Model):
 
     def to_dict(self):
         return {
-            'department_id': self.department_id,
+            'department_id': str(self.department_id),
             'department_name': self.department_name,
             'department_phone_number': self.department_phone_number,
             'employees': tuple(employee.to_dict() for employee in self.employees),
@@ -33,10 +33,10 @@ class Employee(db.Model):
 
     def to_dict(self):
         return {
-            'employee_id': self.employee_id,
+            'employee_id': str(self.employee_id),
             'employee_name': self.employee_name,
             'position': self.position,
             'salary': self.salary,
-            'birthdate': self.birthdate,
-            'department_id': self.department_id,
+            'birthdate': str(self.birthdate),
+            'department_id': str(self.department_id),
         }

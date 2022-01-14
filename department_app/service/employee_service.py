@@ -5,7 +5,7 @@ from uuid import UUID
 from sqlalchemy import and_
 
 from department_app.database import db
-from department_app.models import Department, Employee
+from department_app.models import Employee
 
 
 def get_all_employees() -> list:
@@ -69,7 +69,7 @@ def update_employee(employee_id: UUID,
     return True
 
 
-def delete_department(employee_id: UUID) -> bool:
+def delete_employee(employee_id: UUID) -> bool:
     employee = db.session.get(Employee, employee_id)
     if not employee:
         return False

@@ -14,6 +14,14 @@ class Department(db.Model):
 
     employees = relationship("Employee", backref="department")
 
+    def to_dict(self):
+        return {
+            'department_id': self.department_id,
+            'department_name': self.department_name,
+            'department_phone_number': self.department_phone_number,
+            'employees': tuple(employee.to_dict() for employee in self.employees),
+        }
+
 
 class Employee(db.Model):
     employee_id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
@@ -22,3 +30,13 @@ class Employee(db.Model):
     salary = Column(Float)
     birthdate = Column(Date)
     department_id = Column(UUID(as_uuid=True), ForeignKey('department.department_id'))
+
+    def to_dict(self):
+        return {
+            'employee_id': self.employee_id,
+            'employee_name': self.employee_name,
+            'position': self.position,
+            'salary': self.salary,
+            'birthdate': self.birthdate,
+            'department_id': self.department_id,
+        }

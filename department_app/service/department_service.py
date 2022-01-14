@@ -25,7 +25,7 @@ def get_all_departments() -> list:
     return departments
 
 
-def get_department_by_id(department_id: UUID) -> Union[Department, False]:
+def get_department_by_id(department_id: UUID) -> Union[Department, bool]:
     department = db.session.get(Department, department_id)
     if not department:
         return False

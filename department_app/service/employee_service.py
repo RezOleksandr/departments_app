@@ -13,7 +13,7 @@ def get_all_employees() -> list:
     return employees
 
 
-def get_employee_by_id(employee_id: UUID) -> Union[Employee, False]:
+def get_employee_by_id(employee_id: UUID) -> Union[Employee, bool]:
     employee = db.session.get(Employee, employee_id)
     if not employee:
         return False

@@ -50,4 +50,10 @@ class Employee(db.Model):
             'salary': self.salary,
             'birthdate': str(self.birthdate),
             'department_id': str(self.department_id),
+            'department': {
+                'department_id': str(self.department.department_id),
+                'department_name': self.department.department_name,
+                'department_phone_number': self.department.department_phone_number
+            }
+
         }

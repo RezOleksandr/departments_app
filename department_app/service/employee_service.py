@@ -23,7 +23,7 @@ def get_employee_by_id(employee_id: UUID) -> Union[Employee, bool]:
 def get_employees_with_filter(department_id: UUID = None, start_date: date = None, end_date: date = None) -> list:
     department_filter = (Employee.department_id == department_id) if department_id is not None else True
     start_date_filter = (Employee.birthdate >= start_date) if start_date is not None else True
-    end_date_filter = (Employee.birthdate >= start_date) if end_date is not None else True
+    end_date_filter = (Employee.birthdate <= end_date) if end_date is not None else True
 
     filters = (department_filter, start_date_filter, end_date_filter)
 

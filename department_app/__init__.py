@@ -2,6 +2,7 @@ import os
 import department_app.database as database
 import department_app.models as models
 import department_app.service as service
+import department_app.rest as rest
 
 from flask import Flask
 
@@ -16,4 +17,6 @@ def create_app():
 
     database.db.init_app(app)
     database.migrate.init_app(app, database.db)
+
+    app.register_blueprint(rest.rest_api, url_prefix='/api')
     return app

@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+{% block title %}Edit department{% endblock %}
+<body>
+{% block body %}
+    <div class="tab-bar">
+        <a class="button" href="{{ url_for('departments.departments_view') }}">Departments</a>
+        <a class="active-button button" href="{{ url_for('employees.employees_view') }}">Employees</a>
+    </div>
+    <div class="content">
+        <div class="buttons-bar">
+            <h1 class="employee-header">Edit employee</h1>
+
+            <button class="save-button" onclick="edit_employee()">Save</button>
+
+            <a class="cancel-button" href="{{ url_for('employees.employees_view') }}">Cancel</a>
+        </div>
+        <div class="add-employee-content">
+            <form name="new_employee" action="{{ url_for('rest_api.employeesapi') }}" method="POST">
+                <div class="input-line">
+                    <p>Name</p>
+                    <label>
+                        <input name="employee_name" type="text" value="{{ employee.employee_name }}">
+                    </label>
+                </div>
+                <div class="input-line">
+                    <p>Department</p>
+                    <label>
+                        <select name="department_id">
+                            <option></option>
+                            {% for department in departments %}
+                            {% if department.department_id == employee.department_id %}
+                            <option selected value="{{ department.department_id }}" >{{ department.department_name }}</option>
+                            {% else %}
+                            <option selected value="{{ department.department_id }}" >{{ department.department_name }}</option>
+                            {% endif %}
+                            {% endfor %}
+                        </select>
+                    </label>
+                </div>
+                <div class="input-line">
+                    <p>Position</p>
+                    <label>
+                        <input name="position" type="text" value="{{ employee.position }}">
+                    </label>
+                </div>
+                <div class="input-line">
+                    <p>Salary</p>
+                    <label>
+                        <input name="salary" type="number" value="{{ employee.salary }}">
+                    </label>
+                </div>
+                <div class="input-line">
+                    <p>Birthdate</p>
+                    <label>
+                        <input name="birthdate" type="date" value="{{ employee.birthdate }}">
+                    </label>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script>
+        function edit_employee(){
+            var data = new FormData(document.forms.new_employee)
+            var xhr = new XMLHttpRequest()
+            xhr.open("PUT", "{{ url_for('rest_api.employeeapi', employee_id=employee.employee_id) }}")
+            xhr.send(data)
+            window.location.replace("{{ url_for('employees.employees_view') }}")
+        }
+    </script>
+{% endblock %}
+</body>
+</html>

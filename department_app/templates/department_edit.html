@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+{% block title %}Edit department{% endblock %}
+<body>
+{% block body %}
+    <div class="tab-bar">
+        <a class="active-button button" href="{{ url_for('departments.departments_view') }}">Departments</a>
+        <a class="button" href="{{ url_for('employees.employees_view') }}">Employees</a>
+    </div>
+    <div class="content">
+        <div class="buttons-bar">
+            <h1 class="department_header">Edit department</h1>
+
+            <button class="save-button" onclick="edit_department()">Save</button>
+
+            <a class="cancel-button" href="{{ url_for('departments.departments_view') }}">Cancel</a>
+        </div>
+        <div class="add-department-content">
+            <form name="new_department" action="{{ url_for('rest_api.departmentsapi') }}" method="POST">
+                <div class="input-line">
+                    <p>Name</p>
+                    <label>
+                        <input name="department_name" type="text" value="{{ department.department_name }}">
+                    </label>
+                </div>
+                <div class="input-line">
+                    <p>Phone number</p>
+                    <label>
+                        <input name="department_phone_number" type="text" value="{{ department.department_phone_number }}">
+                    </label>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script>
+        function edit_department(){
+            var data = new FormData(document.forms.new_department)
+            var xhr = new XMLHttpRequest()
+            xhr.open("PUT", "{{ url_for('rest_api.departmentapi', department_id=department.department_id) }}")
+            xhr.send(data)
+            window.location.replace("{{ url_for('departments.departments_view') }}")
+        }
+    </script>
+{% endblock %}
+</body>
+</html>

@@ -40,20 +40,14 @@ class DepartmentsAPI(Resource):
 
 class DepartmentAPI(Resource):
     @staticmethod
-    def get(department_id: str):
-        if not validators.uuid(department_id):
-            return {'error': 'department_id is invalid'}, 400
-        department = get_department_by_id(UUID(department_id))
+    def get(department_id: UUID):
+        department = get_department_by_id(department_id)
         if not department:
             return {'error': 'Not Found'}, 404
         return department.to_dict(), 200
 
     @staticmethod
-    def put(department_id: str):
-        department_id_is_valid = validators.uuid(department_id)
-        if not department_id_is_valid:
-            return {'error': 'department_id is invalid'}, 400
-
+    def put(department_id: UUID):
         try:
             request_data = request.form.to_dict()
             if 'department_name' in request_data:
@@ -73,7 +67,7 @@ class DepartmentAPI(Resource):
             else:
                 department_phone_number = None
 
-            is_updated = update_department(UUID(department_id), department_name, department_phone_number)
+            is_updated = update_department(department_id, department_name, department_phone_number)
             if not is_updated:
                 return {'error': 'Not Found'}, 404
         except KeyError as e:
@@ -83,16 +77,12 @@ class DepartmentAPI(Resource):
         return {'success': 'department has been updated'}, 201
 
     @staticmethod
-    def delete(department_id: str):
-        department_id_is_valid = validators.uuid(department_id)
-        if not department_id_is_valid:
-            return {'error': 'department_id is invalid'}, 400
-
-        is_deleted = delete_department(UUID(department_id))
+    def delete(department_id: UUID):
+        is_deleted = delete_department(department_id)
         if not is_deleted:
             return {'error': 'Not Found'}, 404
         return {'success': 'department has been deleted'}, 200
 
 
 api.add_resource(DepartmentsAPI, '/departments')
-api.add_resource(DepartmentAPI, '/departments/<string:department_id>')
+api.add_resource(DepartmentAPI, '/departments/<uuid:department_id>')

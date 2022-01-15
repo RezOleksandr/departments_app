@@ -101,19 +101,14 @@ class EmployeesAPI(Resource):
 
 class EmployeeAPI(Resource):
     @staticmethod
-    def get(employee_id: str):
-        if not validators.uuid(employee_id):
-            return {'error': 'employee_id is invalid'}, 400
-        employee = get_employee_by_id(UUID(employee_id))
+    def get(employee_id: UUID):
+        employee = get_employee_by_id(employee_id)
         if not employee:
             return {'error': 'Not Found'}, 404
         return employee.to_dict(), 200
 
     @staticmethod
-    def put(employee_id: str):
-        if not validators.uuid(employee_id):
-            return {'error': 'employee_id is invalid'}, 400
-
+    def put(employee_id: UUID):
         try:
             request_data = request.form.to_dict()
             if 'department_name' in request_data:
@@ -164,7 +159,7 @@ class EmployeeAPI(Resource):
             else:
                 department_id = None
 
-            is_updated = update_employee(UUID(employee_id), employee_name, position, salary, birthdate, department_id)
+            is_updated = update_employee(employee_id, employee_name, position, salary, birthdate, department_id)
             if not is_updated:
                 return {'error': 'Not Found'}, 404
         except KeyError as e:
@@ -174,14 +169,12 @@ class EmployeeAPI(Resource):
         return {'success': 'employee has been updated'}, 201
 
     @staticmethod
-    def delete(employee_id: str):
-        if not validators.uuid(employee_id):
-            return {'error': 'employee_id is invalid'}, 400
-        is_deleted = delete_employee(UUID(employee_id))
+    def delete(employee_id: UUID):
+        is_deleted = delete_employee(employee_id)
         if not is_deleted:
             return {'error': 'Not Found'}, 404
         return {'success': 'employee has been deleted'}, 200
 
 
 api.add_resource(EmployeesAPI, '/employees')
-api.add_resource(EmployeeAPI, '/employees/<string:employee_id>')
+api.add_resource(EmployeeAPI, '/employees/<uuid:employee_id>')

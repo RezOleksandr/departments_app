@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+{% block title %}Add employee{% endblock %}
+<body>
+{% block body %}
+    <div class="tab-bar">
+        <a class="button" href="{{ url_for('departments.departments_view') }}">Departments</a>
+        <a class="active-button button" href="{{ url_for('employees.employees_view') }}">Employees</a>
+    </div>
+    <div class="content">
+        <div class="buttons-bar">
+            <h1 class="employee-header">Add employee</h1>
+
+            <button class="save-button" onclick="add_employee()">Save</button>
+
+            <a class="cancel-button" href="{{ url_for('employees.employees_view') }}">Cancel</a>
+        </div>
+        <div class="add-employee-content">
+            <form name="new_employee" action="{{ url_for('rest_api.employeesapi') }}" method="POST">
+                <div class="input-line">
+                    <p>Name</p>
+                    <label>
+                        <input name="employee_name" type="text">
+                    </label>
+                </div>
+                <div class="input-line">
+                    <p>Department</p>
+                    <label>
+                        <select name="department_id">
+                            <option selected></option>
+                            {% for department in departments %}
+                            <option value="{{ department.department_id }}" >{{ department.department_name }}</option>
+                            {% endfor %}
+                        </select>
+                    </label>
+                </div>
+                <div class="input-line">
+                    <p>Position</p>
+                    <label>
+                        <input name="position" type="text">
+                    </label>
+                </div>
+                <div class="input-line">
+                    <p>Salary</p>
+                    <label>
+                        <input name="salary" type="number">
+                    </label>
+                </div>
+                <div class="input-line">
+                    <p>Birthdate</p>
+                    <label>
+                        <input name="birthdate" type="date">
+                    </label>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script>
+        function add_employee(){
+            var data = new FormData(document.forms.new_employee)
+            var xhr = new XMLHttpRequest()
+            xhr.open("POST", "{{ url_for('rest_api.employeesapi') }}")
+            xhr.send(data)
+            window.location.replace("{{ url_for('employees.employees_view') }}")
+        }
+    </script>
+{% endblock %}
+</body>
+</html>

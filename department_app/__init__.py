@@ -1,9 +1,13 @@
 import os
+
+from flask import Flask
+from flask_uuid import FlaskUUID
+
 import department_app.database as database
 import department_app.models as models
 import department_app.service as service
-
-from flask import Flask
+import department_app.rest as rest
+import department_app.views as views
 
 
 def create_app():
@@ -14,6 +18,12 @@ def create_app():
     except OSError:
         pass
 
+    FlaskUUID(app)
+
     database.db.init_app(app)
     database.migrate.init_app(app, database.db)
+
+    app.register_blueprint(rest.rest_api, url_prefix='/api')
+    app.register_blueprint(views.departments)
+    app.register_blueprint(views.employees)
     return app

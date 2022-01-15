@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+{% block title %}Employees{% endblock %}
+<body>
+{% block body %}
+    <div class="tab-bar">
+        <a class="button" href="{{ url_for('departments.departments_view') }}">Departments</a>
+        <a class="active-button button" href="{{ url_for('employees.employees_view') }}">Employees</a>
+    </div>
+    <div id="departments" class="content">
+        <div class="buttons-bar">
+            <a class="add-button" href="{{ url_for('employees.employees_add') }}">Add</a>
+        </div>
+        <div class="search-bar">
+            <form class="search-inputs" name="employee_search" action="{{ url_for('employees.employees_view') }}" method="GET">
+                <label>
+                    <input name="start_date" type="date">
+                </label>
+                —
+                <label>
+                    <input name="end_date" type="date">
+                </label>
+                <label>
+                    Department:
+                    <select name="department_id">
+                        <option selected></option>
+                        {% for department in departments %}
+                        <option value="{{ department.department_id }}" >{{ department.department_name }}</option>
+                        {% endfor %}
+                    </select>
+                </label>
+                <input type="submit" value="Search">
+
+            </form>
+        </div>
+        <div class="departments-content">
+            <table class="departments-table">
+                <tr class="table-header">
+                    <th>Name</th>
+                    <th>Department</th>
+                    <th>Position</th>
+                    <th>Salary</th>
+                    <th>Birthdate</th>
+                    <th></th>
+                </tr>
+                {% for employee in employees %}
+                <tr class="table-content">
+                    <td>{{ employee.employee_name }}</td>
+                    <td>{{ employee.department.department_name }}</td>
+                    <td>{{ employee.position }}</td>
+                    <td>{{ employee.salary }}</td>
+                    <td>{{ employee.birthdate }}</td>
+                    <td>
+                        <a class="edit-button" href="{{ url_for('employees.employees_edit', employee_id=employee.employee_id) }}">Edit</a>
+                        <button id="{{ url_for('rest_api.employeeapi', employee_id=employee.employee_id) }}"  class="delete-button" onclick="delete_department(id)">Delete</button>
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    <script>
+        function delete_department(url){
+            if (confirm("Please confirm deletion of the employee")) {
+                let options = {
+                    method: "DELETE"
+                }
+                fetch(url, options)
+                document.location.reload()
+            }
+        }
+    </script>
+{% endblock %}
+</body>
+</html>

@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+{% block title %}Departments{% endblock %}
+<body>
+{% block body %}
+    <div class="tab-bar">
+        <a class="active-button button" href="{{ url_for('departments.departments_view') }}">Departments</a>
+        <a class="button" href="{{ url_for('employees.employees_view') }}">Employees</a>
+    </div>
+    <div id="departments" class="content">
+        <div class="buttons-bar">
+            <a class="add-button" href="{{ url_for('departments.departments_add') }}">Add</a>
+        </div>
+        <div class="departments-content">
+            <table class="departments-table">
+                <tr class="table-header">
+                    <th>Name</th>
+                    <th>Employees count</th>
+                    <th>Avg. salary</th>
+                    <th>Phone number</th>
+                    <th></th>
+                </tr>
+                {% for department in departments %}
+                <tr class="table-content">
+                    <td>{{ department.department_name }}</td>
+                    <td>{{ department.number_of_employees }}</td>
+                    <td>{{ department.average_salary }}</td>
+                    <td>{{ department.department_phone_number }}</td>
+                    <td>
+                        <a class="edit-button" href="{{ url_for('departments.departments_edit', department_id=department.department_id) }}">Edit</a>
+                        <button id="{{ url_for('rest_api.departmentapi', department_id=department.department_id) }}"  class="delete-button" onclick="delete_department(id)">Delete</button>
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    <script>
+        function delete_department(url){
+            if (confirm("Please confirm deletion of the department")) {
+                let options = {
+                    method: "DELETE"
+                }
+                fetch(url, options)
+                document.location.reload()
+            }
+        }
+    </script>
+{% endblock %}
+</body>
+</html>

@@ -1,10 +1,12 @@
 import os
+
+from flask import Flask
+from flask_uuid import FlaskUUID
+
 import department_app.database as database
 import department_app.models as models
 import department_app.service as service
 import department_app.rest as rest
-
-from flask import Flask
 
 
 def create_app():
@@ -14,6 +16,8 @@ def create_app():
         os.makedirs(app.instance_path)
     except OSError:
         pass
+
+    FlaskUUID(app)
 
     database.db.init_app(app)
     database.migrate.init_app(app, database.db)

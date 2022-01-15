@@ -14,7 +14,7 @@ from . import api
 class EmployeesAPI(Resource):
     @staticmethod
     def get():
-        request_data = request.form.to_dict()
+        request_data = request.args.to_dict()
 
         if request_data is not None:
             if 'department_id' in request_data:

@@ -1,5 +1,5 @@
 """
-Module, containing database and migration tool
+Module containing database and migration tool
 """
 
 from flask_sqlalchemy import SQLAlchemy

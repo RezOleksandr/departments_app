@@ -1,6 +1,9 @@
-import re
+"""
+Module containing REST API resource classes to work with employees
+"""
 from uuid import UUID
 from datetime import datetime, date
+from typing import Tuple, Union
 
 from flask import request
 from flask_restful import Resource
@@ -8,12 +11,20 @@ import validators
 
 from department_app.service import get_all_employees, get_employees_with_filter, get_employee_by_id, \
     create_employee, delete_employee, update_employee, get_department_by_id
-from . import api
 
 
 class EmployeesAPI(Resource):
+    """
+    Resource class to work with employees
+    """
     @staticmethod
-    def get():
+    def get() -> Tuple[Union[dict, list], int]:
+        """
+        Returns list of employees in the database that satisfy filtering options, received from request args
+        or dict containing error message and status code
+        :return: tuple containing list of departments or dict containing error message and status code
+        :rtype: Tuple[Union[dict, list], int]
+        """
         request_data = request.args.to_dict()
 
         if request_data is not None:
@@ -55,7 +66,12 @@ class EmployeesAPI(Resource):
         return employees_dicts, 200
 
     @staticmethod
-    def post():
+    def post() -> Tuple[dict, int]:
+        """
+        Creates employee using data from request from, returns dict containing message and status code
+        :return: tuple containing message dict and status code
+        :rtype: Tuple[dict, int]
+        """
         try:
             request_data = request.form.to_dict()
             employee_name = request_data['employee_name']
@@ -92,16 +108,24 @@ class EmployeesAPI(Resource):
                 return {'error': 'department not found'}, 404
 
             create_employee(employee_name, position, salary, birthdate, department_id)
-        except KeyError as e:
-            return {'error': f'missing parameter {str(e)}'}, 400
-        except Exception as e:
-            return {'error': f'{type(e)}: {str(e)}'}, 500
+        except KeyError as error:
+            return {'error': f'missing parameter {str(error)}'}, 400
         return {'success': 'employee has been created'}, 201
 
 
 class EmployeeAPI(Resource):
+    """
+    Resource class to work with single employee
+    """
     @staticmethod
-    def get(employee_id: UUID):
+    def get(employee_id: UUID) -> Tuple[dict, int]:
+        """
+        Returns employee with specified id
+        :param employee_id: id of an employee
+        :type employee_id: UUID
+        :return: tuple containing message dict or dict representation of an employee and status code
+        :rtype: Tuple[dict, int]
+        """
         employee = get_employee_by_id(employee_id)
         if not employee:
             return {'error': 'Not Found'}, 404
@@ -109,6 +133,14 @@ class EmployeeAPI(Resource):
 
     @staticmethod
     def put(employee_id: UUID):
+        """
+        Updates employee with specified id using data from request from,
+        returns dict containing message and status code
+        :param employee_id: id of a department
+        :type employee_id: UUID
+        :return: tuple containing message dict and status code
+        :rtype: Tuple[dict, int]
+        """
         try:
             request_data = request.form.to_dict()
             if 'department_name' in request_data:
@@ -162,19 +194,20 @@ class EmployeeAPI(Resource):
             is_updated = update_employee(employee_id, employee_name, position, salary, birthdate, department_id)
             if not is_updated:
                 return {'error': 'Not Found'}, 404
-        except KeyError as e:
-            return {'error': f'missing parameter {str(e)}'}, 400
-        except Exception as e:
-            return {'error': f'{type(e)}: {str(e)}'}, 500
+        except KeyError as error:
+            return {'error': f'missing parameter {str(error)}'}, 400
         return {'success': 'employee has been updated'}, 201
 
     @staticmethod
     def delete(employee_id: UUID):
+        """
+        Deletes employee with specified id, returns dict containing message and status code
+        :param employee_id: id of a department
+        :type employee_id: UUID
+        :return: tuple containing message dict and status code
+        :rtype: Tuple[dict, int]
+        """
         is_deleted = delete_employee(employee_id)
         if not is_deleted:
             return {'error': 'Not Found'}, 404
         return {'success': 'employee has been deleted'}, 200
-
-
-api.add_resource(EmployeesAPI, '/employees')
-api.add_resource(EmployeeAPI, '/employees/<uuid:employee_id>')

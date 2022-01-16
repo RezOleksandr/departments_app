@@ -3,13 +3,13 @@ Module containing class for Employee model testing
 """
 
 # pylint: disable=C0103, no-member
-import validators
 from uuid import UUID
 from datetime import date
 
+import validators
 from sqlalchemy.exc import IntegrityError
 
-from conftest import BaseTest, logger
+from department_app.test.conftest import BaseTest, logger
 from department_app.database import db
 from department_app.models import Employee
 
@@ -20,7 +20,7 @@ class EmployeesTest(BaseTest):
     """
 
     @staticmethod
-    def test_employee_creation(self):
+    def test_employee_creation():
         logger.info("Testing employees creation")
         employees = Employee.query.all()
         assert employees is not None

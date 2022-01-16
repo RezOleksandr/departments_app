@@ -3,12 +3,12 @@ Module containing class for Department model testing
 """
 
 # pylint: disable=C0103, no-member
-import validators
 from uuid import UUID
 
+import validators
 from sqlalchemy.exc import IntegrityError
 
-from conftest import BaseTest, logger
+from department_app.test.conftest import BaseTest, logger
 from department_app.database import db
 from department_app.models import Department
 
@@ -19,7 +19,7 @@ class DepartmentsTest(BaseTest):
     """
 
     @staticmethod
-    def test_department_creation(self):
+    def test_department_creation():
         logger.info("Testing department creation")
         departments = Department.query.all()
         assert departments is not None

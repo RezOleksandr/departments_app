@@ -14,13 +14,20 @@ from department_app import rest
 from department_app import views
 
 
-def create_app():
+def create_app(test_config: bool = False) -> Flask:
     """
     Initializes application, web service and database
-    :return:
+    :param test_config: True to use testing configuration
+    :type test_config: bool
+    :return: returns Flask app
+    :rtype: Flask
     """
     app = Flask(__name__, instance_relative_config=True)
-    app.config.from_pyfile('config.py', silent=True)
+    if not test_config:
+        app.config.from_pyfile('config.py', silent=True)
+    else:
+        app.config.from_pyfile('test_config.py', silent=True)
+
     try:
         os.makedirs(app.instance_path)
     except OSError:

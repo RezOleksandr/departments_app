@@ -6,6 +6,7 @@ import os
 
 from flask import Flask
 from flask_uuid import FlaskUUID
+from dotenv import load_dotenv
 
 from department_app import database
 from department_app import models
@@ -22,10 +23,21 @@ def create_app(test_config: bool = False) -> Flask:
     :return: returns Flask app
     :rtype: Flask
     """
+    load_dotenv()
     app = Flask(__name__, instance_relative_config=True)
     if not test_config:
+        app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('SQLALCHEMY_DATABASE_URI')
+        if os.getenv('SQLALCHEMY_TRACK_MODIFICATIONS') == 'False':
+            app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+        else:
+            app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
         app.config.from_pyfile('config.py', silent=True)
     else:
+        app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('SQLALCHEMY_TEST_DATABASE_URI')
+        if os.getenv('SQLALCHEMY_TRACK_MODIFICATIONS') == 'False':
+            app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+        else:
+            app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
         app.config.from_pyfile('test_config.py', silent=True)
 
     try:

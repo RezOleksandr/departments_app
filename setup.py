@@ -51,6 +51,7 @@ setup(
         "py==1.11.0",
         "pylint==2.12.2",
         "pyparsing==3.0.6",
+        "python-dotenv==0.19.2",
         "pytz==2021.3",
         "requests==2.27.1",
         "six==1.16.0",

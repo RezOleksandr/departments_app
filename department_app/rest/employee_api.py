@@ -1,4 +1,3 @@
-import re
 from uuid import UUID
 from datetime import datetime, date
 
@@ -8,7 +7,6 @@ import validators
 
 from department_app.service import get_all_employees, get_employees_with_filter, get_employee_by_id, \
     create_employee, delete_employee, update_employee, get_department_by_id
-from . import api
 
 
 class EmployeesAPI(Resource):
@@ -94,8 +92,6 @@ class EmployeesAPI(Resource):
             create_employee(employee_name, position, salary, birthdate, department_id)
         except KeyError as e:
             return {'error': f'missing parameter {str(e)}'}, 400
-        except Exception as e:
-            return {'error': f'{type(e)}: {str(e)}'}, 500
         return {'success': 'employee has been created'}, 201
 
 
@@ -164,8 +160,6 @@ class EmployeeAPI(Resource):
                 return {'error': 'Not Found'}, 404
         except KeyError as e:
             return {'error': f'missing parameter {str(e)}'}, 400
-        except Exception as e:
-            return {'error': f'{type(e)}: {str(e)}'}, 500
         return {'success': 'employee has been updated'}, 201
 
     @staticmethod
@@ -174,7 +168,3 @@ class EmployeeAPI(Resource):
         if not is_deleted:
             return {'error': 'Not Found'}, 404
         return {'success': 'employee has been deleted'}, 200
-
-
-api.add_resource(EmployeesAPI, '/employees')
-api.add_resource(EmployeeAPI, '/employees/<uuid:employee_id>')

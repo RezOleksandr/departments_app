@@ -7,7 +7,6 @@ import validators
 
 from department_app.service import get_all_departments, get_department_by_id, create_department, delete_department, \
     update_department
-from . import api
 
 
 class DepartmentsAPI(Resource):
@@ -33,8 +32,6 @@ class DepartmentsAPI(Resource):
             create_department(department_name, department_phone_number)
         except KeyError as e:
             return {'error': f'missing parameter {str(e)}'}, 400
-        except Exception as e:
-            return {'error': f'{type(e)}: {str(e)}'}, 500
         return {'success': 'department has been created'}, 201
 
 
@@ -72,8 +69,6 @@ class DepartmentAPI(Resource):
                 return {'error': 'Not Found'}, 404
         except KeyError as e:
             return {'error': f'missing parameter {str(e)}'}, 400
-        except Exception as e:
-            return {'error': f'{type(e)}: {str(e)}'}, 500
         return {'success': 'department has been updated'}, 201
 
     @staticmethod
@@ -82,7 +77,3 @@ class DepartmentAPI(Resource):
         if not is_deleted:
             return {'error': 'Not Found'}, 404
         return {'success': 'department has been deleted'}, 200
-
-
-api.add_resource(DepartmentsAPI, '/departments')
-api.add_resource(DepartmentAPI, '/departments/<uuid:department_id>')

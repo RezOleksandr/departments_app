@@ -2,8 +2,15 @@ language: python
 python:
   - 3.9
 
+services:
+  - postgresql
+
 install:
   - pip install -r requirements.txt
+
+before_script:
+  - psql -c "CREATE USER department-app-admin WITH PASSWORD '$DB_USER_PASSWORD';" -U postgres
+  - psql -c "CREATE DATABASE department-app-db;" -U department-app-admin
 
 script:
   - coverage run -m unittest discover

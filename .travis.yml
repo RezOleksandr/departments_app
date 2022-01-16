@@ -2,8 +2,14 @@ language: python
 python:
   - 3.9
 
+services:
+  - postgresql
+
 install:
   - pip install -r requirements.txt
+
+before_script:
+  - psql -c 'create database department_app_test_db;' -U postgres
 
 script:
   - coverage run -m unittest discover

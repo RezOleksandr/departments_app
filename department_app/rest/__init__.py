@@ -1,3 +1,7 @@
+"""
+Package containing REST API blueprint and classes to work with REST API
+"""
+
 from flask import Blueprint
 from flask_restful import Api
 

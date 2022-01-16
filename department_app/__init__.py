@@ -1,16 +1,24 @@
+"""
+A simple web application for managing departments and employees
+"""
+
 import os
 
 from flask import Flask
 from flask_uuid import FlaskUUID
 
-import department_app.database as database
-import department_app.models as models
-import department_app.service as service
-import department_app.rest as rest
-import department_app.views as views
+from department_app import database
+from department_app import models
+from department_app import service
+from department_app import rest
+from department_app import views
 
 
 def create_app():
+    """
+    Initializes application, web service and database
+    :return:
+    """
     app = Flask(__name__, instance_relative_config=True)
     app.config.from_pyfile('config.py', silent=True)
     try:

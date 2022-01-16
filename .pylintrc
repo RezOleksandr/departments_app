@@ -1,0 +1,27 @@
+[MASTER]
+
+ignore=migrations
+ignore-paths=migrations/.*
+
+
+[SIMILARITIES]
+
+min-similarity-lines=10
+
+
+[FORMAT]
+
+max-line-length=120
+
+indent-string='    '
+
+
+[DESIGN]
+
+max-args=8
+
+max-returns=30
+
+max-branches=30
+
+min-public-methods=0

@@ -2,3 +2,4 @@
 omit =
     department_app/test/*
     department_app/migrations/*
+    instance/*

@@ -37,7 +37,11 @@ class Department(db.Model):
         :return: average salary of employees related to the department
         :rtype: float
         """
-        return sum(employee.salary for employee in self.employees) if self.employees else 0.0
+        if self.number_of_employees > 0:
+            average_salary = (sum(employee.salary for employee in self.employees) / self.number_of_employees)
+        else:
+            average_salary = 0
+        return average_salary
 
     def to_dict(self) -> dict:
         """

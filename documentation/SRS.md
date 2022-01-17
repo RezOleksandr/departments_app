@@ -1,4 +1,4 @@
-#Department Management App
+# Department Management App
 
 ### "Department Management App" is web which allows users to manage information about departments and employees.
 
@@ -9,13 +9,14 @@ Application should provide:
 - Display list of employees;
 - Updating the list of employees (adding, editing, removing);
 - Filtering by birthdate for employees.
+
 ## 1. Departments
 ### 1.1 Display list of departments
 #### Main scenario:
 - User selects item "Departments";
 - Application displays list of departments.
 
-![view departments](mockups/departments_view.png)
+![view departments](mockups/departments_view.png)  
 Pic. 1.1 View the departments list
 
 The page displays the following items:
@@ -41,7 +42,7 @@ Aggregate function: Average employee salary = Employees salaries sum / Employees
 - Entered data is not saved to the database and list of departments is displayed;
 - If the user selects the menu item "Departments" or "Employees", the data will not be saved to the database and the corresponding form will be opened.
 
-![add department](mockups/departments_add.png)
+![add department](mockups/departments_add.png)  
 Pic. 1.2 Add a department.
 
 When adding a department, the following details are entered:
@@ -95,7 +96,7 @@ Constraints for data validation:
 - User cancels deletion of the department;
 - List of departments is displayed. 
 
-![delete department](mockups/departments_delete.png)
+![delete department](mockups/departments_delete.png)  
 Pic. 1.4 Delete a department.
 
 
@@ -107,7 +108,7 @@ Pic. 1.4 Delete a department.
 - User selects item "Employees";
 - Application displays list of employees.
 
-![view employees](mockups/employees_view.png)
+![view employees](mockups/employees_view.png)  
 Pic. 2.1 View the employees list
 
 The page displays the following items:
@@ -150,7 +151,7 @@ Restrictions:
 - Entered data is not saved to the database and list of employees is displayed;
 - If the user selects the menu item "Departments" or "Employees", the data will not be saved to the database and the corresponding form will be opened.
 
-![add employee](mockups/employees_add.png)
+![add employee](mockups/employees_add.png)  
 Pic. 2.2 Add an employee.
 
 When adding an employee, the following details are entered:
@@ -182,7 +183,7 @@ Constraints for data validation:
 - Entered data is not saved to the database and list of employees is displayed.
 - If the user selects the menu item "Departments" or "Employees", the data will not be saved to the database and the corresponding form will be opened.
 
-![edit employee](mockups/employees_edit.png)
+![edit employee](mockups/employees_edit.png)  
 Pic. 2.3 Edit an employee. 
 
 When editing a department, the following details are entered:
@@ -213,5 +214,5 @@ Constraints for data validation:
 - User cancels deletion of the employee;
 - List of employees is displayed. 
 
-![delete employee](mockups/employees_delete.png)
+![delete employee](mockups/employees_delete.png)  
 Pic. 2.4 Delete a n employee.

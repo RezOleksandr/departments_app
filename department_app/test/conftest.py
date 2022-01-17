@@ -33,19 +33,19 @@ class BaseTest(TestCase):
         Method to populate database with test data
         """
         logger.debug("Populating database")
-        department1 = Department(department_name='TEST_DP1', department_phone_number='+380951515121')
-        department2 = Department(department_name='TEST_DP2', department_phone_number='+380455411862')
-        department3 = Department(department_name='TEST_DP3', department_phone_number='+380663123363')
+        department1 = Department(department_name='TEST_DP1', department_phone_number='+381111111111')
+        department2 = Department(department_name='TEST_DP2', department_phone_number='+382222222222')
+        department3 = Department(department_name='TEST_DP3', department_phone_number='+383333333333')
         db.session.add(department1)
         db.session.add(department2)
         db.session.add(department3)
         db.session.commit()
-        employee1 = Employee(employee_name='TEST_E1', position='Senior Developer', salary=500,
-                             birthdate=date(1990, 1, 11), department_id=department1.department_id)
-        employee2 = Employee(employee_name='TEST_E2', position='Middle Developer', salary=1000,
-                             birthdate=date(1995, 2, 12), department_id=department1.department_id)
-        employee3 = Employee(employee_name='TEST_E2', position='Junior Developer', salary=1500,
-                             birthdate=date(2000, 3, 13), department_id=department2.department_id)
+        employee1 = Employee(employee_name='TEST_E1', position='Test Subject 1', salary=111,
+                             birthdate=date(1991, 1, 11), department_id=department1.department_id)
+        employee2 = Employee(employee_name='TEST_E2', position='Test Subject 2', salary=222,
+                             birthdate=date(1992, 2, 12), department_id=department1.department_id)
+        employee3 = Employee(employee_name='TEST_E3', position='Test Subject 3', salary=333,
+                             birthdate=date(1993, 3, 13), department_id=department2.department_id)
         db.session.add(employee1)
         db.session.add(employee2)
         db.session.add(employee3)

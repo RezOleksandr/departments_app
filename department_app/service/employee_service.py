@@ -91,9 +91,9 @@ def create_employee(employee_name: str, position: str, salary: float, birthdate:
 def update_employee(employee_id: UUID,
                     employee_name: Union[str, None] = None,
                     position: Union[str, None] = None,
-                    salary: Union[str, None] = None,
-                    birthdate: Union[str, None] = None,
-                    department_id: Union[str, None] = None) -> bool:
+                    salary: Union[float, None] = None,
+                    birthdate: Union[date, None] = None,
+                    department_id: Union[UUID, None] = None) -> bool:
     """
     Function updates Employee with specified id
     :param employee_id: id of an employee

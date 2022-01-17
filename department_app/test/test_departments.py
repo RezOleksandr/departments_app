@@ -56,6 +56,9 @@ class DepartmentsTest(BaseTest):
         assert isinstance(department1.average_salary, float)
         assert round(department1.average_salary, 3) == round((111 + 222) / 2, 3)
 
+        department3 = Department.query.filter_by(department_name='TEST_DP3').one()
+        assert department3.average_salary == 0
+
     @staticmethod
     def test_department_to_dict():
         logger.info("Testing department to_dict method")

@@ -48,13 +48,13 @@ class DepartmentsTest(BaseTest):
     @staticmethod
     def test_department_employees():
         logger.info("Testing department employees")
-        department1 = Department.query.filter_by(department_name='TEST_DP1').all()[0]
+        department1 = Department.query.filter_by(department_name='TEST_DP1').one()
 
         assert department1.employees is not None
         assert isinstance(department1.number_of_employees, int)
         assert len(department1.employees) == department1.number_of_employees == 2
         assert isinstance(department1.average_salary, float)
-        assert department1.average_salary == 750.0
+        assert round(department1.average_salary, 3) == round((111 + 222) / 2, 3)
 
     @staticmethod
     def test_department_to_dict():

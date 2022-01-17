@@ -53,7 +53,7 @@ class EmployeesTest(BaseTest):
     @staticmethod
     def test_employee_department():
         logger.info("Testing department employees")
-        employee1 = Employee.query.filter_by(employee_name='TEST_E1').all()[0]
+        employee1 = Employee.query.filter_by(employee_name='TEST_E1').one()
 
         assert employee1.department is not None
         assert employee1.department.department_id == employee1.department_id

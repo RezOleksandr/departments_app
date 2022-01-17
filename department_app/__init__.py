@@ -42,6 +42,8 @@ def create_app(test_config: bool = False) -> Flask:
 
     database.db.init_app(app)
     database.migrate.init_app(app, database.db)
+    with app.app_context():
+        database.db.create_all()
 
     app.register_blueprint(rest.rest_api, url_prefix='/api')
     app.register_blueprint(views.departments)

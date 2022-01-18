@@ -15,7 +15,7 @@ from department_app.models import Department
 
 class DepartmentsTest(BaseTest):
     """
-    Class for department model test
+    Class for department model tests
     """
 
     @staticmethod

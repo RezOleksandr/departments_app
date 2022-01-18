@@ -13,7 +13,7 @@ from department_app.service import get_all_departments, get_department_by_id, cr
 
 class DepartmentsServiceTest(BaseTest):
     """
-    Class for departments service test
+    Class for departments service tests
     """
     @staticmethod
     def test_get_all_departments():

@@ -64,7 +64,7 @@ def get_employees_with_filter(department_id: Union[UUID, None] = None,
 
 def create_employee(employee_name: str, position: str, salary: float, birthdate: date, department_id: UUID) -> bool:
     """
-    Function creates new Department
+    Function creates new Employee
     :param employee_name: name of an employee
     :type employee_name: str
     :param position: position of an employee

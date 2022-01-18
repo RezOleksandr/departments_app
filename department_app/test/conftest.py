@@ -8,7 +8,6 @@ import unittest
 from datetime import date
 
 from flask_testing import TestCase
-from flask import current_app
 
 from department_app import create_app
 from department_app.database import db
@@ -59,6 +58,7 @@ class BaseTest(TestCase):
 
     def setUp(self):
         logger.debug("Running setup")
+        self.app = self.create_app().test_client()
         db.create_all()
         self.populate_db()
 
@@ -66,15 +66,6 @@ class BaseTest(TestCase):
         logger.debug("Running teardown")
         db.session.remove()
         db.drop_all()
-
-    def test_app(self) -> None:
-        """
-        Test if testing app is created
-        :return: None
-        """
-        logger.info("Testing app creation")
-        assert self.app is not None
-        assert current_app == self.app
 
 
 if __name__ == '__main__':

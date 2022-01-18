@@ -27,7 +27,7 @@ class EmployeesAPI(Resource):
         """
         request_data = request.args.to_dict()
 
-        if request_data is not None:
+        if request_data:
             if 'department_id' in request_data:
                 department_id = request_data['department_id']
                 if not validators.uuid(department_id):
@@ -143,7 +143,7 @@ class EmployeeAPI(Resource):
         """
         try:
             request_data = request.form.to_dict()
-            if 'department_name' in request_data:
+            if 'employee_name' in request_data:
                 employee_name = request_data['employee_name']
                 if not validators.length(employee_name, min=2, max=32):
                     return {'error': 'employee_name is invalid'}, 400
